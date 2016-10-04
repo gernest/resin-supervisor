@@ -33,7 +33,7 @@ There are some differences:
 
 ### Design
 
-Resin Supervisor exposes a REST interface when the data-flow goes from the Resin Application to the Resin API (from now on, called **pull** dataflow) and a **Hook** mechanism when the data-flow goes from the Resin API to the Resin Application (from now on, called **push** dataflow). The term **Hook** is meant as a convention of HTTP requests made from the Resin Supervisor to the gateway application
+Resin Supervisor exposes a REST interface when the data-flow goes from the gateway application to the Resin API (from now on, called **pull** dataflow) and a **Hook** mechanism when the data-flow goes from the Resin API to the gateway application (from now on, called **push** dataflow). The term **Hook** is meant as a convention of HTTP requests made from the Resin Supervisor to the gateway application
 
 
 ### Hook

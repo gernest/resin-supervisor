@@ -239,7 +239,7 @@ $RESIN_SUPERVISOR_ADDRESS/v1/devices/<uuid>?apikey=$RESIN_SUPERVISOR_API_KEY
 ```
 
 ### POST /v1/devices/:uuid/logs
-Dependent Dependent Device Log
+Dependent Device Log
 
 **Example**
 

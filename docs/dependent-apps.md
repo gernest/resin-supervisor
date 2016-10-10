@@ -273,5 +273,17 @@ Dependent Device Update Notification
 curl -H "Content-Type: application/json" -X PUT /
 --data '{"commit":" <commit>","environment": "<environment>"}' http://127.0.0.1:1337/v1/devices/<uuid>
 ```
+**Responses**
+* `HTTP/1.1 200 OK` Acknowledgement of the notification without further trials: The Supervisor won't repeat the hook request
+* `HTTP/1.1 202 ACCEPTED`Acknowledgement of the notification with validation: the Supervisor will repeat the hook request until the dependent device information gets updated via `Dependent Device Information Update` endpoint
+
+### DELETE /v1/devices/:uuid
+Dependent Device Delete Notification
+
+**Example**
+
+```bash
+curl -X DELETE http://127.0.0.1:1337/v1/devices/<uuid>
+```
 **Response**
 `HTTP/1.1 200 OK`

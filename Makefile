@@ -26,6 +26,10 @@ DEPLOY_REGISTRY =
 
 SUPERVISOR_VERSION = master
 
+DOCKER_VERSION:=$(shell docker version --format '{{.Server.Version}}')
+DOCKER_MAJOR_VERSION:=$(word 1, $(subst ., ,$(DOCKER_VERSION)))
+DOCKER_MINOR_VERSION:=$(word 2, $(subst ., ,$(DOCKER_VERSION)))
+
 all: supervisor
 
 PUBNUB_SUBSCRIBE_KEY = sub-c-bananas
@@ -160,7 +164,13 @@ lint:
 	docker run --rm resin/node-supervisor-$(ARCH):$(SUPERVISOR_VERSION) bash -c 'npm install resin-lint && npm run lint'
 
 deploy: supervisor
-	docker tag -f $(IMAGE) $(SUPERVISOR_IMAGE)
+	# Since docker 1.12 tag --force is removed.
+	if [ ${DOCKER_MAJOR_VERSION} -ge 1 ] && [ ${DOCKER_MINOR_VERSION} -ge 12 ] ; then \
+		docker tag $(IMAGE) $(SUPERVISOR_IMAGE); \
+	else \
+		docker tag -f $(IMAGE) $(SUPERVISOR_IMAGE); \
+	fi ;\
+
 	bash retry_docker_push.sh $(SUPERVISOR_IMAGE)
 
 nodesuper:
